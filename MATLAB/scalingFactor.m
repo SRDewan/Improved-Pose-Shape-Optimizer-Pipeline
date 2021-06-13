@@ -31,4 +31,4 @@ proj = planeProj(scaledWireframe(:, 1:3), scaledWireframe(:, 12));
 Axes = [[scaledWireframe(:, 1) - scaledWireframe(:, 2)], [scaledWireframe(:, 7) - scaledWireframe(:, 5)], [scaledWireframe(:, 12) - proj]];
 dims = vecnorm(Axes);
 % disp(dims);
-% visualizeWireframe3D(wireframe);
+% visualizeWireframe3D(scaledWireframe);
