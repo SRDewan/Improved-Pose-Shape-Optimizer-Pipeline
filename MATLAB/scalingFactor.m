@@ -22,6 +22,7 @@ Axes = Axes ./ dims;
 
 avgDims = [1.6362, 3.8600, 1.5208];
 scale = avgDims ./ dims;
+% We obtain a scaling factor of [0.2941, 0.3458, 0.4401]
 scaledWireframe = wireframe .* scale';
 
 % Axes = [[wireframe(:, 2) - wireframe(:, 1)], [wireframe(:, 7) - wireframe(:, 5)], [wireframe(:, 14) - wireframe(:, 4)]];
