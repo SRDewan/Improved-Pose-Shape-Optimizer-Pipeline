@@ -18,7 +18,7 @@ err = [];
 for i = 1:size(trackletInfo, 1)
 	b = [(trackletInfo(i, 4) + trackletInfo(i, 6)) / 2; trackletInfo(i, 7); 1];
 	B = (-h * inv(K) * b) ./ (n' * inv(K) * b);
-	B = B + [0; -avgDims(3) / 2; avgDims(2) / 2];
+	B = B + [0; 0; avgDims(2) / 2];
 
 	predicted = [predicted; B'];
 	err = [err; abs(B' - groundTruth(i, 4:6))];
