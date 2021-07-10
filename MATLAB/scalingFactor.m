@@ -1,5 +1,8 @@
 function [scaledWireframe] = scalingFactor()
 
+common = load('data').common;
+avgDims = common.avgDims;
+
 wireframe = load('../parameters/meanShape.txt');
 wireframe = wireframe';
 % visualizeWireframe3D(wireframe);
@@ -21,7 +24,6 @@ dims = vecnorm(Axes);
 % The axes are supposed to be unit vectors and hence the division by the norm
 Axes = Axes ./ dims;
 
-avgDims = [1.6362, 3.8600, 1.5208];
 scale = avgDims ./ dims;
 % We obtain a scaling factor of [0.2941, 0.3458, 0.4491]
 % disp(scale);

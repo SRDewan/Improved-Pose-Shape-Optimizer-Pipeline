@@ -1,8 +1,10 @@
 function [predicted, err] = mobili(groundTruth, trackletInfo)
 
-K = [721.53,0,609.55;0,721.53,172.85;0,0,1]; %Intrinsics
+common = load('data').common;
+K = common.K;
+avgDims = common.avgDims;
+
 n = [0; -1; 0]; %ground plane normal
-avgDims = [1.6362, 3.8600, 1.5208];
 h = avgDims(3); %camera height
 
 predicted = [];
