@@ -1,7 +1,10 @@
 function [rotWireframe, rotBasisVecs] = rotEst(groundTruth, trackletInfo, wireFrame, basisVecs)
 
-offset = 90;
-ry = trackletInfo(8) + offset * pi / 180;
+common = load('data').common;
+common.offset = 90;
+save('data', 'common');
+
+ry = trackletInfo(8) + common.offset * pi / 180;
 R = [cos(ry) 0 sin(ry); 0 1 0; -sin(ry) 0 cos(ry)];
 
 rotWireframe = R * wireFrame;
