@@ -31,5 +31,5 @@ for i = 1:size(trans, 1)
 	fclose(file);
 
 	cmd = 'cd ../ceres; ./singleViewPoseAdjuster; cd -';
-	system(commands);
+	system(cmd);
 end
