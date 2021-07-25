@@ -1,5 +1,6 @@
-function [] = poseOpt(groundTruth, trackletInfo, alignedKeypts, weights)
+function [poseFrames] = poseOpt(groundTruth, trackletInfo, alignedKeypts, weights)
 
+poseFrames = [];
 views = 1;
 pts = 14;
 obs = 14;
@@ -32,4 +33,11 @@ for i = 1:size(trans, 1)
 
 	cmd = 'cd ../ceres; ./singleViewPoseAdjuster; cd -';
 	system(cmd);
+
+	data = importdata('../ceres/ceres_output_singleViewPoseAdjuster.txt');
+	rotParams = data(1:9);
+	transParams = data(10:12);
+	R = reshape(rotParams, [3 3]);
+	poseFrame = (R * alignedFrames(3 * i - 2:3 * i, :)) + transParams;
+	poseFrames = [poseFrames; poseFrame];
 end

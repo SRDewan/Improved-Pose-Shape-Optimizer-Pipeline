@@ -19,4 +19,5 @@ keyPts = load('../parameters/result_KP.txt');
 weights = kpWeights(trackletInfo, confidences);
 %imgPlot(trackletInfo, alignedKeypts, true);
 
-poseOpt(groundTruth, trackletInfo, alignedKeypts, weights);
+[poseFrames] = poseOpt(groundTruth, trackletInfo, alignedKeypts, weights);
+imgPlot(trackletInfo, poseFrames, false);
