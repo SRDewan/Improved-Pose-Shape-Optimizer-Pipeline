@@ -3,7 +3,7 @@ function [weights] = kpWeights(trackletInfo, confidences)
 common = load('data').common;
 kpLookup = importdata('../parameters/kpLookup_azimuth.mat');
 weights = [];
-wkpsWeight = 0.3;
+wkpsWeight = 0.7;
 
 for i = 1:size(confidences, 1)
 	azimuth = round(trackletInfo(i, 8) * 180 / pi + common.offset);
