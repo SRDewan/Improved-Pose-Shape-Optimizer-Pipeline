@@ -1,8 +1,6 @@
-function [translation, rotation, poseFrames] = poseOpt(groundTruth, trackletInfo, alignedKeypts, weights)
+function [shapeFrames] = shapeOpt(groundTruth, trackletInfo, alignedKeypts, weights, translation, rotation)
 
-poseFrames = [];
-translation = [];
-rotation = [];
+shapeFrames = [];
 views = 1;
 pts = 14;
 obs = 14;
@@ -16,7 +14,7 @@ lambda = [0.250000 0.270000 0.010000 -0.080000 -0.050000];
 [alignedFrames, alignedVecs] = alignFrame(groundTruth, trackletInfo);
 
 for i = 1:size(trans, 1)
-	file = fopen('../ceres/ceres_input_singleViewPoseAdjuster.txt', 'w');
+	file = fopen('../ceres/ceres_input_singleViewShapeAdjuster.txt', 'w');
 	fprintf(file, '%d %d %d\n', [views, pts, obs]);
 	fprintf(file, '%f %f %f\n', trans(i, :));
 	fprintf(file, '%f %f %f\n', avgDims);
@@ -31,18 +29,13 @@ for i = 1:size(trans, 1)
 	    end
 
 	fprintf(file, '%f %f %f %f %f\n', lambda);
+	fprintf(file, '%f %f %f %f %f\n', rotation(i, :)');
+	fprintf(file, '%f %f %f %f %f\n', translation(i, :)');
 	fclose(file);
 
-	cmd = 'cd ../ceres; ./singleViewPoseAdjuster; cd -';
+	cmd = 'cd ../ceres; ./singleViewShapeAdjuster; cd -';
 	system(cmd);
 
-	data = importdata('../ceres/ceres_output_singleViewPoseAdjuster.txt');
-	rotParams = data(1:9);
-	transParams = data(10:12);
-	R = reshape(rotParams, [3 3]);
-	poseFrame = (R * alignedFrames(3 * i - 2:3 * i, :)) + transParams;
-
-	translation = [translation; transParams'];
-	rotation = [rotation; rotParams'];
-	poseFrames = [poseFrames; poseFrame];
+	data = importdata('../ceres/ceres_output_singleViewShapeAdjuster.txt');
+	shapeFrames = [shapeFrames; data'];
 end
