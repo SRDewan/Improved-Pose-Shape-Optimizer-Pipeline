@@ -14,12 +14,6 @@ for i = 1:size(trackletInfo, 1)
 	finalWireFrames = [finalWireFrames; alignWireFrame];
 
 	finalBasisVecs = alignBasisVecs;
-	%for j = 1:size(alignBasisVecs, 1)
-		%temp = reshape(alignBasisVecs(j, :), [3, 14]);
-		%temp = temp + trans(i, :)';
-		%finalBasisVec = reshape(temp, [1, 42]);
-		%finalBasisVecs = [finalBasisVecs; finalBasisVec];
-	%end
 	allFinalBasisVecs = [allFinalBasisVecs; finalBasisVecs];
 
 	alignWireFrameImg = K * alignWireFrame;
