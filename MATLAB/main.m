@@ -20,7 +20,6 @@ weights = kpWeights(trackletInfo, confidences);
 [translation, rotation, poseFrames] = poseOpt(groundTruth, trackletInfo, alignedKeypts, weights);
 
 [shapeFrames] = shapeOpt(groundTruth, trackletInfo, alignedKeypts, weights, translation, rotation);
-imgPlot(trackletInfo, shapeFrames, 4);
 
 common.alignedKeypts = alignedKeypts;
 common.alignedFrames = alignedFrames;
@@ -28,3 +27,5 @@ common.poseFrames = poseFrames;
 common.shapeFrames = shapeFrames;
 save('data', 'common');
 imgPlot(trackletInfo, [], 5);
+
+errEst(groundTruth, trackletInfo);
