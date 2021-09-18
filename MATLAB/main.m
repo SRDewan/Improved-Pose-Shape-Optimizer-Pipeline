@@ -20,15 +20,15 @@ keyPts = getKeyPts(seq, frm, id);
 weights = kpWeights(trackletInfo, confidences);
 % imgPlot(trackletInfo, alignedKeypts, 1);
 
-%[translation, rotation, poseFrames] = poseOpt(groundTruth, trackletInfo, alignedKeypts, weights);
+[translation, rotation, poseFrames] = poseOpt(groundTruth, trackletInfo, alignedKeypts, weights);
 
-%[shapeFrames] = shapeOpt(groundTruth, trackletInfo, alignedKeypts, weights, translation, rotation);
+[shapeFrames] = shapeOpt(groundTruth, trackletInfo, alignedKeypts, weights, translation, rotation);
 
-%common.alignedKeypts = alignedKeypts;
-%common.alignedFrames = alignedFrames;
-%common.poseFrames = poseFrames;
-%common.shapeFrames = shapeFrames;
-%save('data', 'common');
+common.alignedKeypts = alignedKeypts;
+common.alignedFrames = alignedFrames;
+common.poseFrames = poseFrames;
+common.shapeFrames = shapeFrames;
+save('data', 'common');
 %imgPlot(trackletInfo, [], 5);
 
 %errEst(groundTruth, trackletInfo);
