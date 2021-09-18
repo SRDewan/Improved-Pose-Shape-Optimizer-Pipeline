@@ -26,11 +26,17 @@ for i = 1:size(trans, 1)
 	fprintf(file, '%f\n', weights(i, :)');
 	fprintf(file, '%f %f %f\n', alignedFrames(3 * i - 2:3 * i, :));
 
-	for j=1:5
-		fprintf(file, '%f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n', alignedVecs(5 * (i - 1) + j, :));
-	    end
+	for j=1:42
+        	for k=1:3:108
+            		fprintf(file, '%f %f %f ', alignedVecs(42 * (i - 1) + j, k : k + 2));
+        	end
+        	fprintf(file, "\n");
+	end
 
-	fprintf(file, '%f %f %f %f %f\n', lambda);
+	for j=1:size(lambda, 2)
+        	fprintf(file, '%f ', lambda(j));
+	end
+
 	fclose(file);
 
 	cmd = 'cd ../ceres; ./singleViewPoseAdjuster; cd -';
