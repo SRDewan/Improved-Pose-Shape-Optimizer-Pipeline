@@ -15,9 +15,10 @@ addpath('../devkit/matlab/');
 [alignedFrames, alignedVecs] = alignFrame(groundTruth, trackletInfo);
 % imgPlot(trackletInfo, alignedFrames, 0);
 
-%keyPts = load('../parameters/result_KP.txt');
-%[alignedKeypts, confidences] = alignKeypts(trackletInfo, keyPts);
-%weights = kpWeights(trackletInfo, confidences);
+keyPts = getKeyPts(seq, frm, id);
+[alignedKeypts, confidences] = alignKeypts(trackletInfo, keyPts, common.keyptCtr);
+weights = kpWeights(trackletInfo, confidences);
+% imgPlot(trackletInfo, alignedKeypts, 1);
 
 %[translation, rotation, poseFrames] = poseOpt(groundTruth, trackletInfo, alignedKeypts, weights);
 
