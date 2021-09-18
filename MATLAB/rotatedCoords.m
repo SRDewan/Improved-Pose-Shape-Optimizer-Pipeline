@@ -1,4 +1,4 @@
-function [camWireframe, camBasisVecs] = rotatedCoords()
+function [camWireframe, camBasisVecs] = rotatedCoords(keyptCtr)
 
 wireframe = scalingFactor();
 % visualizeWireframe3D(wireframe);
@@ -12,16 +12,17 @@ wireframe = scalingFactor();
 
 % We compare this with the world coordinate system to obtain the required
 % rotation matrix. The negative sign indicates a 180 turn in direction.
-R = [[-1, 0, 0]', [0, 0, -1]', [0, -1, 0]'];
+R = [[0, 0, 1]', [0, -1, 0]', [1, 0, 0]'];
 camWireframe = R * wireframe;
 
 basisVecs = load('../parameters/vectors.txt');
 camBasisVecs = [];
 
 for i = 1:size(basisVecs, 1)
-    temp = reshape(basisVecs(i, :), [3, 14]);
+    temp = reshape(basisVecs(i, :), [3, keyptCtr]);
     temp = R * temp;
-    camBasisVecs(i, :) = reshape(temp, [1, 42]);
+    camBasisVecs(i, :) = reshape(temp, [1, 3 * keyptCtr]);
 end
 
+% visualizeWireframe3D(camWireframe)
 % disp(camBasisVecs);

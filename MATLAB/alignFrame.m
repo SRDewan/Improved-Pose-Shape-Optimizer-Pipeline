@@ -2,8 +2,9 @@ function [finalWireFrames, allFinalBasisVecs] = alignFrame(groundTruth, tracklet
 
 common = load('data').common;
 K = common.K;
+keyptCtr = common.keyptCtr;
 
-[wireFrame, basisVecs] = rotatedCoords();
+[wireFrame, basisVecs] = rotatedCoords(keyptCtr);
 [trans, err] = mobili(groundTruth, trackletInfo);
 finalWireFrames = [];
 allFinalBasisVecs = [];

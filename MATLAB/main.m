@@ -1,7 +1,8 @@
 function [] = main()
 
 common.K = [721.53,0,609.55;0,721.53,172.85;0,0,1];
-common.avgDims = [1.6362, 3.8600, 1.5208];
+common.avgDims = [3.8600, 1.5208, 1.6362];
+common.keyptCtr = 36;
 save('data', 'common');
 
 seq = [ 2,10,  4,  8, 2, 9]; %Sequences
@@ -12,20 +13,21 @@ addpath('../devkit/matlab/');
 [groundTruth, trackletInfo] = getObjsInfo('../data/training/label_02', seq, frm, id);
 
 [alignedFrames, alignedVecs] = alignFrame(groundTruth, trackletInfo);
+% imgPlot(trackletInfo, alignedFrames, 0);
 
-keyPts = load('../parameters/result_KP.txt');
-[alignedKeypts, confidences] = alignKeypts(trackletInfo, keyPts);
-weights = kpWeights(trackletInfo, confidences);
+%keyPts = load('../parameters/result_KP.txt');
+%[alignedKeypts, confidences] = alignKeypts(trackletInfo, keyPts);
+%weights = kpWeights(trackletInfo, confidences);
 
-[translation, rotation, poseFrames] = poseOpt(groundTruth, trackletInfo, alignedKeypts, weights);
+%[translation, rotation, poseFrames] = poseOpt(groundTruth, trackletInfo, alignedKeypts, weights);
 
-[shapeFrames] = shapeOpt(groundTruth, trackletInfo, alignedKeypts, weights, translation, rotation);
+%[shapeFrames] = shapeOpt(groundTruth, trackletInfo, alignedKeypts, weights, translation, rotation);
 
-common.alignedKeypts = alignedKeypts;
-common.alignedFrames = alignedFrames;
-common.poseFrames = poseFrames;
-common.shapeFrames = shapeFrames;
-save('data', 'common');
-imgPlot(trackletInfo, [], 5);
+%common.alignedKeypts = alignedKeypts;
+%common.alignedFrames = alignedFrames;
+%common.poseFrames = poseFrames;
+%common.shapeFrames = shapeFrames;
+%save('data', 'common');
+%imgPlot(trackletInfo, [], 5);
 
-errEst(groundTruth, trackletInfo);
+%errEst(groundTruth, trackletInfo);

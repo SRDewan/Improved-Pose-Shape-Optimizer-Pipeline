@@ -1,6 +1,7 @@
 function [rotWireframe, rotBasisVecs] = rotEst(groundTruth, trackletInfo, wireFrame, basisVecs)
 
 common = load('data').common;
+keyptCtr = common.keyptCtr;
 common.offset = 90;
 save('data', 'common');
 
@@ -11,7 +12,7 @@ rotWireframe = R * wireFrame;
 rotBasisVecs = [];
 
 for i = 1:size(basisVecs, 1)
-    temp = reshape(basisVecs(i, :), [3, 14]);
+    temp = reshape(basisVecs(i, :), [3, keyptCtr]);
     temp = R * temp;
-    rotBasisVecs = [rotBasisVecs; reshape(temp, [1, 42])];
+    rotBasisVecs = [rotBasisVecs; reshape(temp, [1, 3 * keyptCtr])];
 end
