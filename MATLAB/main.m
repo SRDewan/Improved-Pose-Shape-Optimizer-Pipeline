@@ -29,6 +29,8 @@ common.alignedFrames = alignedFrames;
 common.poseFrames = poseFrames;
 common.shapeFrames = shapeFrames;
 save('data', 'common');
+%common = load('data').common;
+%imgPlot(trackletInfo, common.poseFrames, 0);
 %imgPlot(trackletInfo, [], 5);
 
 %errEst(groundTruth, trackletInfo);

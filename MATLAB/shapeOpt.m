@@ -4,7 +4,7 @@ shapeFrames = [];
 views = 1;
 
 common = load('data').common;
-avgDims = [common.avgDims(3), common.avgDims(2), common.avgDims(1)];
+avgDims = [common.avgDims(2), common.avgDims(3), common.avgDims(1)];
 K = common.K;
 pts = common.keyptCtr;
 obs = common.keyptCtr;
