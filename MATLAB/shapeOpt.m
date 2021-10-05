@@ -1,6 +1,7 @@
-function [shapeFrames] = shapeOpt(groundTruth, trackletInfo, alignedKeypts, weights, translation, rotation)
+function [shapeFrames, shapeLambdas] = shapeOpt(groundTruth, trackletInfo, alignedKeypts, weights, translation, rotation)
 
 shapeFrames = [];
+shapeLambdas = [];
 views = 1;
 
 common = load('data').common;
@@ -44,4 +45,6 @@ for i = 1:size(trans, 1)
 
 	data = importdata('../ceres/ceres_output_singleViewShapeAdjuster.txt');
 	shapeFrames = [shapeFrames; data'];
+	lambdaData = importdata('../ceres/lvals.txt');
+	shapeLambdas = [shapeLambdas; lambdaData];
 end
