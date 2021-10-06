@@ -56,6 +56,7 @@ for i = 1:size(trackletInfo, 1)
 			save_file_name = sprintf('%s/%d.jpg', workingDir, trackletInfo(i, 2));
 			imwrite(F.cdata, save_file_name);
 			close(figure);
+			close all;
 		end
 	end
 
