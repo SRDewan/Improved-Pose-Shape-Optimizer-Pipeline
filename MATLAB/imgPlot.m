@@ -8,12 +8,12 @@ for i = 1:size(trackletInfo, 1)
 	figTitle = figTitle(1:end - 1);      % strip final comma
 	figure('NumberTitle', 'off', 'Name', figTitle);
 
-	if type == 6
-		img = imread(sprintf('../data/training/image_02/%04d/%06d.png', trackletInfo(i, 1), trackletInfo(i, 2)));
+	%if type == 6
+	img = imread(sprintf('../data/training/image_02/%04d/%06d.png', trackletInfo(i, 1), trackletInfo(i, 2)));
 
-	else
-		img = imread(strcat('../data/', string(trackletInfo(i, 1)), '_', string(trackletInfo(i, 2)), '.png'));
-	end
+	%else
+		%img = imread(strcat('../data/', string(trackletInfo(i, 1)), '_', string(trackletInfo(i, 2)), '.png'));
+	%end
 
 	if type == 5
 		subplot(2, 2, 1);
@@ -44,6 +44,18 @@ for i = 1:size(trackletInfo, 1)
 		imshow(img);
 		hold on;
 		plot(pts(2 * i - 1, :), pts(2 * i, :), 'linestyle', 'none', 'marker', 'o', 'MarkerFaceColor', 'b');
+
+		a = [1:36]';
+		b = num2str(a); c = cellstr(b); % strings to label
+		dx = 0.1; dy = 0.1; % displacement  so the text does not overlay the data points
+		text(pts(2 * i - 1, :)' + dx, pts(2 * i, :)' + dy, c, colo='green', fontsize=15);
+
+		F = getframe;
+		% save the image
+		save_file_name = sprintf('../results/multiView/keyPoints/5_0_31_31/%d.jpg', trackletInfo(i, 2));
+		imwrite(F.cdata, save_file_name);
+		close(figure);
+		close all;
 
 	else
 		alignWireFrameImg = K * pts(3 * i - 2:3 * i, :);
