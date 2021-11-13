@@ -1,7 +1,15 @@
-function [keyPts] = getKeyPts(seq, frm, id, keyptCtr)
+function [keyPts] = getKeyPts(seq, frm, id, keyptCtr, annotated)
 
-allKeyPts = load('../parameters/result_KP.txt');
-corrs = load('../parameters/infofile.txt');
+keyPtsPath = '../parameters/result_KP.txt';
+infoPath = '../parameters/infofile.txt';
+
+if annotated
+	keyPtsPath = '../parameters/annotated_KP.txt';
+	infoPath = '../parameters/annInfofile.txt';
+end
+
+allKeyPts = load(keyPtsPath);
+corrs = load(infoPath);
 keyPts = zeros([size(seq, 2), keyptCtr * 3]);
 
 for i = 1:size(corrs, 1)

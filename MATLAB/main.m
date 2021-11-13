@@ -14,12 +14,12 @@ addpath('../devkit/matlab/');
 [groundTruth, trackletInfo] = getObjsInfo('../data/training/label_02', seq, frm, id);
 
 [alignedFrames, alignedVecs] = alignFrame(groundTruth, trackletInfo);
-% imgPlot(trackletInfo, alignedFrames, 0, '');
+%imgPlot(trackletInfo, alignedFrames, 2, '');
 
-keyPts = getKeyPts(seq, frm, id, common.keyptCtr);
+keyPts = getKeyPts(seq, frm, id, common.keyptCtr, false);
 [alignedKeypts, confidences] = alignKeypts(trackletInfo, keyPts, common.keyptCtr);
 weights = kpWeights(trackletInfo, confidences);
-% imgPlot(trackletInfo, alignedKeypts, 1, '');
+%imgPlot(trackletInfo, alignedKeypts, 1, '');
 
 [translation, rotation, poseFrames] = poseOpt(groundTruth, trackletInfo, alignedKeypts, weights);
 
@@ -31,7 +31,7 @@ common.poseFrames = poseFrames;
 common.shapeFrames = shapeFrames;
 save('data', 'common');
 
-%imgPlot(trackletInfo, common.poseFrames, 0, '');
-imgPlot(trackletInfo, [], 5, '');
+%imgPlot(trackletInfo, common.poseFrames, 2, '');
+imgPlot(trackletInfo, [], 3, '');
 
 errEst(groundTruth, trackletInfo);
